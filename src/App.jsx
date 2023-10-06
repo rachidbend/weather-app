@@ -1,35 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { WeatherProvider } from './context/WeatherContext';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <WeatherProvider>
+      <div className="app">this is the weather app</div>
+    </WeatherProvider>
+  );
 }
 
-export default App
+export default App;
+
+/* 
+User story: I can see city weather as default, preferably my current location
+User story: I can search for city
+User story: I can see weather of today and the next 5 days
+User story: I can see the date and location of the weather
+User story: I can see according to image for each type of weather
+User story: I can see the min and max degree each day
+User story: I can see wind status and wind direction
+User story: I can see humidity percentage
+User story: I can see a visibility indicator
+User story: I can see the air pressure number
+User story(optional): I can request my current location weather
+User story(optional): I can convert temperature in Celcius to Fahrenheit and vice versa
+*/
