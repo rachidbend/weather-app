@@ -57,11 +57,14 @@ function WeatherProvider({ children }) {
     {
       data,
       cityName,
-      isLoading,
       currentCity,
       filteredWeather,
+      isLoading,
+      degree,
       todaysWeather,
       forcastWeather,
+      searchQuery,
+      searchHistory,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -206,11 +209,14 @@ function WeatherProvider({ children }) {
       value={
         (data,
         cityName,
-        isLoading,
         currentCity,
         filteredWeather,
+        isLoading,
+        degree,
         todaysWeather,
-        forcastWeather)
+        forcastWeather,
+        searchQuery,
+        searchHistory)
       }
     >
       {children}
