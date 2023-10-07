@@ -1,0 +1,21 @@
+:global(.btn) {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+.searchBtn {
+  background: #6e707a;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  padding: 0.9rem 1.7rem;
+
+  border: 0.1rem solid #6e707a;
+  color: #e7e7eb;
+  font-size: 1.6rem;
+  font-weight: 500;
+  transition: background 360ms;
+}
+.searchBtn:hover {
+  color: #e7e7eb;
+  background: hsla(234, 32%, 17%, 1);
+}

@@ -1,0 +1,81 @@
+.todaysWeatherPanel {
+  background-color: hsla(234, 32%, 17%, 1);
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4.2rem 4.6rem;
+  z-index: 999;
+}
+.todaysWeatherPanel::before {
+  content: '';
+  background: url('../../assets/Cloud-background.png');
+
+  background-size: 149%;
+  background-position: -11.1rem 10.3rem;
+  background-repeat: no-repeat;
+  position: absolute;
+  /* height: 100vh; */
+  display: inline-block;
+  top: 0rem;
+  left: 0rem;
+  bottom: 0rem;
+  right: 0rem;
+  opacity: 0.1;
+  z-index: -1;
+}
+.btnContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.todaysWeatherIcon {
+  /* background-color: red; */
+}
+
+.todaysWeatherTemp {
+  color: #e7e7eb;
+
+  font-size: 14.4rem;
+
+  font-weight: 500;
+}
+.todaysWeatherTempDegree {
+  font-size: 4.8rem;
+  font-weight: 500;
+  color: #a09fb1;
+  font-family: 'Raleway', sans-serif;
+}
+.todaysWeatherCondition {
+  color: #a09fb1;
+  font-size: 3.6rem;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.todaysWeatherDate {
+  color: #88869d;
+  font-family: Raleway;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 500;
+  margin-bottom: 3.2rem;
+}
+.todaysWeatherCity {
+  color: #88869d;
+  font-family: Raleway;
+  font-size: 1.8rem;
+  text-align: center;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+.todaysWeatherDateStar {
+  margin: 0 1.6rem;
+}
+
+.todaysWeatherCity img {
+  height: 1.8rem;
+  width: auto;
+}

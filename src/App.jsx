@@ -1,11 +1,13 @@
-import './App.css';
-import { WeatherProvider } from './context/WeatherContext';
+import styles from './App.module.css';
+import ForcastAndHighlightsPanel from './components/forcastAndHighlightsPanel/ForcastAndHighlightsPanel';
+import TodaysWeather from './components/todaysWeather/TodaysWeather';
 
 function App() {
   return (
-    <WeatherProvider>
-      <div className="app">this is the weather app</div>
-    </WeatherProvider>
+    <div className={styles.app}>
+      <TodaysWeather />
+      <ForcastAndHighlightsPanel />
+    </div>
   );
 }
 

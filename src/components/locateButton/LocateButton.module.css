@@ -1,0 +1,17 @@
+.btnLocate {
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 5rem;
+  padding: 0.7rem;
+  height: 4rem;
+  width: 4rem;
+  background-color: hsla(230, 5%, 45%, 1);
+
+  border: 0.1rem solid hsla(230, 5%, 45%, 1);
+  transition: background 360ms;
+  fill: hsla(240, 9%, 91%, 1);
+  color: hsla(240, 9%, 91%, 1);
+}
+
+.btnLocate:hover {
+  background-color: hsla(234, 32%, 17%, 1);
+}

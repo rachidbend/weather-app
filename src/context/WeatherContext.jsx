@@ -25,12 +25,15 @@ const initialState = {
   forcastWeather: [],
   searchQuery: '',
   searchHistory: [],
+  navIsOpen: false,
 };
 
 function reducer(state, action) {
   switch (action.type) {
     case 'weather/fetched':
       return { ...state, data: action.payload };
+    case 'city/fetched':
+      return { ...state, currentCity: action.payload };
     case 'isLoading/loading':
       return { ...state, isLoading: true };
     case 'isLoading/loaded':
@@ -43,6 +46,8 @@ function reducer(state, action) {
       return { ...state, forcastWeather: action.payload };
     case 'search':
       return { ...state, searchQuery: action.payload };
+    case 'nav/toggled':
+      return { ...state, navIsOpen: state.navIsOpen ? false : true };
     default:
       throw new Error('unknown action');
   }
@@ -51,7 +56,8 @@ function reducer(state, action) {
 const KEY = '1cb3310072a70eabebd5a0ea30592c64';
 const latTest = '33.99700164794922';
 const lngTest = '-6.8460001945495605';
-
+// http://localhost:8000/weather
+// https://api.openweathermap.org/data/2.5/forecast?lat=${latTest}&lon=${lngTest}&appid=${KEY}
 function WeatherProvider({ children }) {
   const [
     {
@@ -65,6 +71,7 @@ function WeatherProvider({ children }) {
       forcastWeather,
       searchQuery,
       searchHistory,
+      navIsOpen,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -78,11 +85,13 @@ function WeatherProvider({ children }) {
         // console.log(data);
         if (!res) throw new Error('there is no res');
         dispatch({ type: 'weather/fetched', payload: data.list });
+        dispatch({ type: 'city/fetched', payload: data.city });
 
         // filtering weather
         const groupedWeatherData = {};
         const conditionCounts = {};
-        const avrgConditions = [];
+        const iconCounts = {};
+
         // Loop through the weather data and group by day
         data.list.map(data => {
           // Extract the date from the 'dt_txt' field, assuming it's in 'YYYY-MM-DD' format
@@ -101,18 +110,21 @@ function WeatherProvider({ children }) {
           conditionCounts[date] = conditionCounts[date] || {};
           conditionCounts[date][condition] =
             (conditionCounts[date][condition] || 0) + 1;
+
+          // Count weather icons
+          const icon = data.weather[0].icon;
+          iconCounts[date] = iconCounts[date] || {};
+          iconCounts[date][icon] = (iconCounts[date][icon] || 0) + 1;
         });
         dispatch({ type: 'weather/filtered', payload: groupedWeatherData });
         // /////////////////////////////////////////
 
         // Calculate the average weather condition for each day
         for (const date in groupedWeatherData) {
-          // const conditions = groupedWeatherData[date].map(
-          //   condition => condition.weather[0].main
-          // );
-          // console.log(conditions);
           let maxCount = 0;
+          let maxIconCount = 0;
           let mostCommonCondition = '';
+          let mostCommonIcon = '';
 
           for (const condition in conditionCounts[date]) {
             if (conditionCounts[date][condition] > maxCount) {
@@ -121,7 +133,15 @@ function WeatherProvider({ children }) {
             }
           }
 
+          for (const icon in iconCounts[date]) {
+            if (iconCounts[date][icon] > maxIconCount) {
+              maxIconCount = iconCounts[date][icon];
+              mostCommonIcon = icon;
+            }
+          }
+
           groupedWeatherData[date].averageCondition = mostCommonCondition;
+          groupedWeatherData[date].icon = mostCommonIcon;
         }
 
         // filter days
@@ -129,7 +149,7 @@ function WeatherProvider({ children }) {
 
         for (const date in groupedWeatherData) {
           // date
-          const curDate = date;
+          const curDate = groupedWeatherData[date][0].dt;
           // max tempriture
           const maxTemps = Math.max(
             ...groupedWeatherData[date].map(day => day.main.temp_max)
@@ -175,6 +195,7 @@ function WeatherProvider({ children }) {
             return day.visibility;
           });
           const avrgVisibility = getAvrg(visibilities);
+          console.log(groupedWeatherData[date]);
           const day = {
             date: curDate,
             condition: condition,
@@ -186,6 +207,7 @@ function WeatherProvider({ children }) {
             humidity: avrgHumidity,
             visibilitie: avrgVisibility,
             airPressure: avrgPressure,
+            icon: groupedWeatherData[date].icon,
           };
           allWeather.push(day);
         }
@@ -206,8 +228,8 @@ function WeatherProvider({ children }) {
 
   return (
     <context.Provider
-      value={
-        (data,
+      value={{
+        data,
         cityName,
         currentCity,
         filteredWeather,
@@ -216,8 +238,9 @@ function WeatherProvider({ children }) {
         todaysWeather,
         forcastWeather,
         searchQuery,
-        searchHistory)
-      }
+        searchHistory,
+        navIsOpen,
+      }}
     >
       {children}
     </context.Provider>
@@ -226,6 +249,7 @@ function WeatherProvider({ children }) {
 
 function useWeather() {
   const value = useContext(context);
+
   if (!value) throw new Error(`context can't be accessed`);
   return value;
 }
