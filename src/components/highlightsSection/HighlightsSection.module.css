@@ -1,0 +1,126 @@
+.highlightsSection {
+}
+.highlightsContianer {
+  display: grid;
+  grid-template-columns: 32.8rem 32.8rem;
+  grid-template-rows: 20.4rem 15.9rem;
+  gap: 4.8rem;
+}
+.highlightsHeader {
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 2.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 3.2rem;
+}
+.windDirectionIcon {
+  width: 1.7697rem;
+  height: 1.7697rem;
+}
+
+.highlight {
+  background-color: hsla(234, 32%, 17%, 1);
+  text-align: center;
+  padding-top: 2.2rem;
+  /* width: 32.8rem; */
+}
+.highlightHeader {
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.highlightStat {
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 6.4rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.highlightUnit {
+  font-size: 3.6rem;
+  font-weight: 500;
+}
+
+/* wind section */
+.highlightWind .highlightStat {
+  margin-bottom: 3.1rem;
+}
+.windDirectionContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.windDirectionContainer img {
+  background-color: hsla(240, 9%, 91%, 0.3);
+  padding: 0.5rem;
+  border-radius: 5rem;
+  width: 2.9494rem;
+  height: 2.9494rem;
+}
+
+.windDirectionContainer p {
+  color: #e7e7eb;
+  font-family: Raleway;
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+.humidityRange {
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+  position: relative;
+  width: 22.9rem;
+}
+.humidityRange::-webkit-slider-runnable-track {
+  width: 22.9rem;
+  height: 0.8rem;
+  background-color: hsla(240, 9%, 91%, 1);
+  border-radius: 8rem;
+}
+.humidityRange::-moz-range-track {
+  width: 22.9rem;
+  height: 0.8rem;
+  background-color: hsla(240, 9%, 91%, 1);
+  border-radius: 8rem;
+}
+
+.humidityRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.humidityRange::-moz-range-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* .humidityRange::before {
+  content: '';
+  height: 0.8rem;
+  background-color: yellow;
+  display: inline-block;
+  width: 5rem;
+} */
+.humidityRangeContainer {
+  position: relative;
+  display: inline-block;
+}
+.humidityRangeSpan {
+  position: absolute;
+  height: 0.8rem;
+
+  background-color: hsla(53, 100%, 70%, 1);
+  left: 0px;
+  top: 1px;
+  border-radius: 8rem;
+}

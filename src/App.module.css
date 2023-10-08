@@ -15,6 +15,8 @@ html {
   min-height: 100vh;
   color: #eee;
   font-family: 'Raleway', sans-serif;
+  background-color: hsla(234, 32%, 17%, 1);
+  min-height: 100vh;
 }
 
 :global(.btn) {
