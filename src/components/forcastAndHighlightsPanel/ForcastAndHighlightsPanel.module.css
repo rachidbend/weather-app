@@ -1,3 +1,32 @@
 .ForcastAndHighlightsPanel {
   background-color: hsla(248, 35%, 8%, 1);
+  padding-left: 15.4rem;
+  padding-right: 12.3rem;
+}
+.btnContainer {
+  margin-top: 4.2rem;
+  margin-bottom: 6.6rem;
+  display: flex;
+  justify-content: end;
+  gap: 1.2rem;
+}
+.btnDegree {
+  width: 4rem;
+  height: 4rem;
+  background-color: hsla(244, 16%, 40%, 1);
+  border-radius: 5rem;
+
+  color: #e7e7eb;
+  text-align: center;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.8rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  transition: color 360ms, background 360ms;
+}
+
+.btnDegreeActive {
+  background-color: hsla(240, 9%, 91%, 1);
+  color: #110e3c;
 }

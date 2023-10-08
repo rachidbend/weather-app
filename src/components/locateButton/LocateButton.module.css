@@ -8,8 +8,8 @@
 
   border: 0.1rem solid hsla(230, 5%, 45%, 1);
   transition: background 360ms;
-  fill: hsla(240, 9%, 91%, 1);
-  color: hsla(240, 9%, 91%, 1);
+  /* fill: hsla(240, 9%, 91%, 1); */
+  /* color: hsla(240, 9%, 91%, 1); */
 }
 
 .btnLocate:hover {

@@ -4,6 +4,7 @@ import SearchButton from '../searchButton/SearchButton';
 import styles from './TodaysWeather.module.css';
 import locationPinIcon from '../../assets/svg/location-pin.svg';
 import LocateButton from '../locateButton/LocateButton';
+import GetFormatedTemp from '../getFormatedTemp/GetFormatedTemp';
 
 export default function TodaysWeather() {
   const {
@@ -23,15 +24,6 @@ export default function TodaysWeather() {
     return <p>loading data</p>;
   const dateOfToday = formatDate(todaysWeather.date);
 
-  const temp = Number(
-    (degree === 'celsius'
-      ? todaysWeather.temp - 273.15
-      : degree === 'fahrenheit'
-      ? (todaysWeather.temp - 273.15) * 1.8 + 32
-      : 'nothing'
-    ).toFixed(0)
-  );
-
   return (
     <div className={styles.todaysWeatherPanel}>
       <div className={styles.btnContainer}>
@@ -44,10 +36,10 @@ export default function TodaysWeather() {
       />
 
       <h1 className={styles.todaysWeatherTemp}>
-        {temp}
-        <span className={styles.todaysWeatherTempDegree}>
-          &deg;{degree === 'celsius' ? 'C' : degree === 'fahrenheit' ? 'F' : ''}
-        </span>
+        <GetFormatedTemp
+          temp={todaysWeather.temp}
+          className={styles.todaysWeatherTempDegree}
+        />
       </h1>
       <p className={styles.todaysWeatherCondition}>
         {todaysWeather.condition}{' '}

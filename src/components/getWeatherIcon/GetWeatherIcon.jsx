@@ -11,7 +11,7 @@ import iconSleet from '../../assets/Sleet.png';
 import iconSnow from '../../assets/Snow.png';
 import iconThunderstorm from '../../assets/Thunderstorm.png';
 
-export default function GetWeatherIcon({ condition, className }) {
+export default function GetWeatherIcon({ condition, className = '' }) {
   // light cloudes
   if (condition === 'few clouds' || condition === 'scattered clouds')
     return <img src={iconLightCloud} className={className} />;
