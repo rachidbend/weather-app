@@ -82,7 +82,7 @@ function WeatherProvider({ children }) {
       try {
         const res = await fetch(`http://localhost:8000/weather`);
         const data = await res.json();
-        // console.log(data);
+
         if (!res) throw new Error('there is no res');
         dispatch({ type: 'weather/fetched', payload: data.list });
         dispatch({ type: 'city/fetched', payload: data.city });
@@ -195,7 +195,7 @@ function WeatherProvider({ children }) {
             return day.visibility;
           });
           const avrgVisibility = getAvrg(visibilities);
-          console.log(groupedWeatherData[date]);
+
           const day = {
             date: curDate,
             condition: condition,
@@ -226,6 +226,29 @@ function WeatherProvider({ children }) {
     getWeather();
   }, []);
 
+  // format date
+  function formatDate(date) {
+    const curDate = new Date(date * 1000);
+    const daysList = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
+    const monthsList = [
+      'Jan',
+      'Feb',
+      'Mar',
+      'Apr',
+      'May',
+      'Jun',
+      'Jul',
+      'Aug',
+      'Sep',
+      'Oct',
+      'Nov',
+      'Decr',
+    ];
+    const day = daysList[curDate.getDay()];
+    const month = monthsList[curDate.getMonth()];
+    const formatedDate = `${day}, ${curDate.getDate()} ${month}`;
+    return formatedDate;
+  }
   return (
     <context.Provider
       value={{
@@ -240,6 +263,7 @@ function WeatherProvider({ children }) {
         searchQuery,
         searchHistory,
         navIsOpen,
+        formatDate,
       }}
     >
       {children}

@@ -6,8 +6,14 @@ import locationPinIcon from '../../assets/svg/location-pin.svg';
 import LocateButton from '../locateButton/LocateButton';
 
 export default function TodaysWeather() {
-  const { cityName, currentCity, degree, todaysWeather, isLoading } =
-    useWeather();
+  const {
+    cityName,
+    currentCity,
+    degree,
+    todaysWeather,
+    isLoading,
+    formatDate,
+  } = useWeather();
 
   if (
     Object.keys(currentCity).length === 0 ||
@@ -15,8 +21,8 @@ export default function TodaysWeather() {
     isLoading
   )
     return <p>loading data</p>;
-  const dateOfToday = new Date(todaysWeather.date * 1000);
-  console.log(dateOfToday);
+  const dateOfToday = formatDate(todaysWeather.date);
+
   const temp = Number(
     (degree === 'celsius'
       ? todaysWeather.temp - 273.15
@@ -51,7 +57,7 @@ export default function TodaysWeather() {
         <p className={styles.todaysWeatherDate}>
           <span>Today</span>
           <span className={styles.todaysWeatherDateStar}>•</span>
-          <span>{dateOfToday.toLocaleDateString()}</span>
+          <span>{dateOfToday}</span>
         </p>
         <h3 className={styles.todaysWeatherCity}>
           <img src={locationPinIcon} alt="location pin" /> {currentCity.name}
