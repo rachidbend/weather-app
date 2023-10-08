@@ -212,7 +212,7 @@ function WeatherProvider({ children }) {
               windSpeed: windSpeed,
               windDirection: windDirection,
               humidity: avrgHumidity,
-              visibilitie: avrgVisibility,
+              visibility: avrgVisibility,
               airPressure: avrgPressure,
               icon: groupedWeatherData[date].icon,
             };

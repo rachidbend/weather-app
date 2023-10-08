@@ -1,5 +1,6 @@
 import { useWeather } from '../../context/WeatherContext';
 import ForcastSection from '../forcastSection/ForcastSection';
+import HighlightsSection from '../highlightsSection/HighlightsSection';
 import styles from './ForcastAndHighlightsPanel.module.css';
 export default function ForcastAndHighlightsPanel() {
   const { onCelsiusClick, onFahrenheitClick, degree } = useWeather();
@@ -24,7 +25,7 @@ export default function ForcastAndHighlightsPanel() {
         </button>
       </div>
       <ForcastSection />
-      <h2>highlights</h2>
+      <HighlightsSection />
     </div>
   );
 }
