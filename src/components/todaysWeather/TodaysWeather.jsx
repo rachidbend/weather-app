@@ -7,14 +7,8 @@ import LocateButton from '../locateButton/LocateButton';
 import GetFormatedTemp from '../getFormatedTemp/GetFormatedTemp';
 
 export default function TodaysWeather() {
-  const {
-    cityName,
-    currentCity,
-    degree,
-    todaysWeather,
-    isLoading,
-    formatDate,
-  } = useWeather();
+  const { cityName, currentCity, todaysWeather, isLoading, formatDate } =
+    useWeather();
 
   if (
     Object.keys(currentCity).length === 0 ||
@@ -22,6 +16,7 @@ export default function TodaysWeather() {
     isLoading
   )
     return <p>loading data</p>;
+
   const dateOfToday = formatDate(todaysWeather.date);
 
   return (
@@ -41,9 +36,7 @@ export default function TodaysWeather() {
           className={styles.todaysWeatherTempDegree}
         />
       </h1>
-      <p className={styles.todaysWeatherCondition}>
-        {todaysWeather.condition}{' '}
-      </p>
+      <p className={styles.todaysWeatherCondition}>{todaysWeather.condition}</p>
 
       <div>
         <p className={styles.todaysWeatherDate}>

@@ -35,17 +35,23 @@ export default function HighlightsSection() {
             <span className={styles.highlightUnit}>%</span>
           </p>
           <div className={styles.humidityRangeContainer}>
-            <input
-              type="range"
-              value={todaysWeather.humidity}
-              onChange={() => ''}
-              className={styles.humidityRange}
-            />
+            <p className={styles.humidityRangeText}>
+              <span>0</span> <span>50</span> <span>100</span>
+            </p>
+            <div className={styles.humidityRangeInsideContainer}>
+              <input
+                type="range"
+                value={todaysWeather.humidity}
+                onChange={() => ''}
+                className={styles.humidityRange}
+              />
 
-            <span
-              style={{ width: `${todaysWeather.humidity}%` }}
-              className={styles.humidityRangeSpan}
-            ></span>
+              <span
+                style={{ width: `${todaysWeather.humidity}%` }}
+                className={styles.humidityRangeSpan}
+              ></span>
+            </div>
+            <p className={styles.humidityRangeSymbol}>%</p>
           </div>
         </div>
 

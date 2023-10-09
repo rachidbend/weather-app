@@ -26,6 +26,7 @@ const initialState = {
   searchQuery: '',
   searchHistory: [],
   navIsOpen: false,
+  coords: { lat: 0, lng: 0 },
 };
 
 function reducer(state, action) {
@@ -52,14 +53,19 @@ function reducer(state, action) {
       return { ...state, degree: 'celsius' };
     case 'degree/fahrenheit':
       return { ...state, degree: 'fahrenheit' };
+    case 'coords/loaded':
+      return {
+        ...state,
+        coords: { lat: action.payload.lat, lng: action.payload.lng },
+      };
     default:
       throw new Error('unknown action');
   }
 }
 
 const KEY = '1cb3310072a70eabebd5a0ea30592c64';
-const latTest = '33.99700164794922';
-const lngTest = '-6.8460001945495605';
+const GEO_KEY = `351033302760799866119x43556`;
+// `https://geocode.xyz/city=${searchQuery}?json=1&auth=${GEO_KEY}`
 // http://localhost:8000/weather
 // https://api.openweathermap.org/data/2.5/forecast?lat=${latTest}&lon=${lngTest}&appid=${KEY}
 function WeatherProvider({ children }) {
@@ -76,6 +82,7 @@ function WeatherProvider({ children }) {
       searchQuery,
       searchHistory,
       navIsOpen,
+      coords,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
@@ -85,7 +92,9 @@ function WeatherProvider({ children }) {
       async function getWeather() {
         dispatch({ type: 'isLoading/loading' });
         try {
-          const res = await fetch(`http://localhost:8000/weather`);
+          const res = await fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${coords.lat}&lon=${coords.lng}&appid=${KEY}`
+          );
           const data = await res.json();
 
           if (!res) throw new Error('there is no res');
@@ -232,8 +241,24 @@ function WeatherProvider({ children }) {
       //
       getWeather();
     },
-    [cityName]
+    [cityName, coords]
   );
+
+  useEffect(function () {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        const { latitude: lat } = position.coords;
+        const { longitude: lng } = position.coords;
+        dispatch({
+          type: 'coords/loaded',
+          payload: { lat, lng },
+        });
+      },
+      function () {
+        throw new Error(`Couldn't find you location`);
+      }
+    );
+  }, []);
 
   // format date
   function formatDate(date) {

@@ -5,6 +5,7 @@
   grid-template-columns: 32.8rem 32.8rem;
   grid-template-rows: 20.4rem 15.9rem;
   gap: 4.8rem;
+  margin-bottom: 2rem;
 }
 .highlightsHeader {
   color: #e7e7eb;
@@ -33,6 +34,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-bottom: 0.6rem;
 }
 
 .highlightStat {
@@ -51,6 +53,9 @@
 /* wind section */
 .highlightWind .highlightStat {
   margin-bottom: 3.1rem;
+}
+.highlightHumidity .highlightStat {
+  margin-bottom: 3.2rem;
 }
 .windDirectionContainer {
   display: flex;
@@ -104,14 +109,10 @@
   appearance: none;
 }
 
-/* .humidityRange::before {
-  content: '';
-  height: 0.8rem;
-  background-color: yellow;
-  display: inline-block;
-  width: 5rem;
-} */
 .humidityRangeContainer {
+  text-align: center;
+}
+.humidityRangeInsideContainer {
   position: relative;
   display: inline-block;
 }
@@ -123,4 +124,32 @@
   left: 0px;
   top: 1px;
   border-radius: 8rem;
+  cursor: pointer;
+}
+.humidityRangeText {
+  color: #a09fb1;
+  text-align: center;
+
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  display: flex;
+  width: 22.9rem;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-bottom: 0.2rem;
+}
+.humidityRangeSymbol {
+  color: #a09fb1;
+  text-align: center;
+
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  text-align: right;
+  width: 22.9rem;
+  margin: 0 auto;
+  margin-top: 0.4rem;
 }
