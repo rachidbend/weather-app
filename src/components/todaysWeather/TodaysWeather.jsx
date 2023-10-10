@@ -5,8 +5,9 @@ import styles from './TodaysWeather.module.css';
 import locationPinIcon from '../../assets/svg/location-pin.svg';
 import LocateButton from '../locateButton/LocateButton';
 import GetFormatedTemp from '../getFormatedTemp/GetFormatedTemp';
+import { memo } from 'react';
 
-export default function TodaysWeather() {
+const TodaysWeather = memo(function TodaysWeather() {
   const { cityName, currentCity, todaysWeather, isLoading, formatDate } =
     useWeather();
 
@@ -50,4 +51,5 @@ export default function TodaysWeather() {
       </div>
     </div>
   );
-}
+});
+export default TodaysWeather;

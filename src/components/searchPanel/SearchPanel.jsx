@@ -3,7 +3,8 @@ import closeIcon from '../../assets/svg/icon-close.svg';
 import searchIcon from '../../assets/svg/icon-search.svg';
 import { useWeather } from '../../context/WeatherContext';
 import SearchHistoryComponent from './SearchHistoryComponent';
-export default function SearchPanel() {
+import { memo } from 'react';
+const SearchPanel = memo(function SearchPanel() {
   const {
     searchQuery,
     onSearchQueryChange,
@@ -75,4 +76,6 @@ export default function SearchPanel() {
       </div>
     </div>
   );
-}
+});
+
+export default SearchPanel;

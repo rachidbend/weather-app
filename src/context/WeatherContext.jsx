@@ -1,5 +1,11 @@
 /* eslint-disable react/prop-types */
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+} from 'react';
 
 // get the average temp
 function getAvrg(arr) {
@@ -143,9 +149,6 @@ function WeatherProvider({ children }) {
   function getCityName() {
     dispatch({ type: 'cityName/entered' });
     dispatch({ type: 'nav/toggled' });
-    // 1- use the search query to fetch the city coords
-    // 2- dispatch an action to set the coords
-    // 3- close the nav
   }
 
   useEffect(
@@ -386,33 +389,44 @@ function WeatherProvider({ children }) {
     dispatch({ type: 'myLocation/load' });
   }
 
-  return (
-    <context.Provider
-      value={{
-        data,
-        cityName,
-        currentCity,
-        filteredWeather,
-        isLoading,
-        degree,
-        todaysWeather,
-        forcastWeather,
-        searchHistory,
-        navIsOpen,
-        formatDate,
-        onCelsiusClick,
-        onFahrenheitClick,
-        searchQuery,
-        onSearchQueryChange,
-        getCityName,
-        onNavToggle,
-        onHistoryClick,
-        onGetMyLocation,
-      }}
-    >
-      {children}
-    </context.Provider>
-  );
+  // memoizing the values
+  const value = useMemo(() => {
+    return {
+      data,
+      cityName,
+      currentCity,
+      filteredWeather,
+      isLoading,
+      degree,
+      todaysWeather,
+      forcastWeather,
+      searchHistory,
+      navIsOpen,
+      formatDate,
+      onCelsiusClick,
+      onFahrenheitClick,
+      searchQuery,
+      onSearchQueryChange,
+      getCityName,
+      onNavToggle,
+      onHistoryClick,
+      onGetMyLocation,
+    };
+  }, [
+    cityName,
+    currentCity,
+    data,
+    degree,
+    filteredWeather,
+    forcastWeather,
+    isLoading,
+    navIsOpen,
+    searchHistory,
+    searchQuery,
+    todaysWeather,
+  ]);
+
+  return <context.Provider value={value}>{children}</context.Provider>;
 }
 
 function useWeather() {

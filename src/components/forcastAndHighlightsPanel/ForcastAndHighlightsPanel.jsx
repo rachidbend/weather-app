@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { useWeather } from '../../context/WeatherContext';
 import ForcastSection from '../forcastSection/ForcastSection';
 import HighlightsSection from '../highlightsSection/HighlightsSection';
 import styles from './ForcastAndHighlightsPanel.module.css';
-export default function ForcastAndHighlightsPanel() {
+const ForcastAndHighlightsPanel = memo(function ForcastAndHighlightsPanel() {
   const { onCelsiusClick, onFahrenheitClick, degree } = useWeather();
   return (
     <div className={styles.ForcastAndHighlightsPanel}>
@@ -28,4 +29,5 @@ export default function ForcastAndHighlightsPanel() {
       <HighlightsSection />
     </div>
   );
-}
+});
+export default ForcastAndHighlightsPanel;

@@ -2,7 +2,9 @@ import { useWeather } from '../../context/WeatherContext';
 import styles from './HighlightsSection.module.css';
 import windDirectionIcon from '../../assets/svg/icon-navigation.svg';
 import WindDirectionText from './WindDirectionText';
-export default function HighlightsSection() {
+import { memo } from 'react';
+
+const HighlightsSection = memo(function HighlightsSection() {
   const { todaysWeather } = useWeather();
 
   if (Object.keys(todaysWeather).length === 0) return <p>Loading</p>;
@@ -73,4 +75,6 @@ export default function HighlightsSection() {
       </div>
     </div>
   );
-}
+});
+
+export default HighlightsSection;
