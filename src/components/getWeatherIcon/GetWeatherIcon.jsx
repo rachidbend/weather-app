@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-import styles from './GetWeatherIcon.module.css';
 import iconClear from '../../assets/Clear.png';
 import iconHail from '../../assets/Hail.png';
 import iconHeavyCloud from '../../assets/HeavyCloud.png';
