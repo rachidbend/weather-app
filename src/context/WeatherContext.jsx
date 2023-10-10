@@ -25,7 +25,7 @@ const initialState = {
   forcastWeather: [],
   searchQuery: '',
   searchHistory: ['rabat', 'london', 'paris'],
-  navIsOpen: false,
+  navIsOpen: true,
   coords: { lat: 0, lng: 0 },
   getMyLocation: true,
 };

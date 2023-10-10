@@ -155,4 +155,11 @@
 }
 
 @media screen and (max-width: 600px) {
+  .highlightsContianer {
+    display: grid;
+    grid-template-columns: 32.8rem;
+    grid-template-rows: 20.4rem 20.4rem 15.9rem 15.9rem;
+    gap: 4.8rem;
+    margin-bottom: 2rem;
+  }
 }

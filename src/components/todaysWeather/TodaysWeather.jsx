@@ -15,7 +15,7 @@ export default function TodaysWeather() {
     Object.keys(todaysWeather).length === 0 ||
     isLoading
   )
-    return <p>loading data</p>;
+    return <p className={styles.todaysWeatherPanel}>loading data</p>;
 
   const dateOfToday = formatDate(todaysWeather.date);
 

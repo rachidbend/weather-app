@@ -119,3 +119,27 @@
 .historyComponent:hover .historyArrowIcon {
   opacity: 1;
 }
+
+@media screen and (max-width: 600px) {
+  .searchPanel {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 0 1.2rem;
+  }
+  .btnCloseContainer {
+    margin-bottom: 2.4rem;
+  }
+  .btnClose {
+    margin-top: 1.2rem;
+  }
+
+  .searchContainer form {
+    display: flex;
+    position: relative;
+    gap: 1.2rem;
+  }
+  .searchInputContainer {
+    width: 100%;
+    margin-bottom: 3.8rem;
+  }
+}

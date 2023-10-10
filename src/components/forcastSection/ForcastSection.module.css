@@ -5,3 +5,12 @@
   gap: 2.3rem;
   margin-bottom: 7.2rem;
 }
+
+@media screen and (max-width: 600px) {
+  .forcastSection {
+    display: grid;
+    grid-template-columns: 12rem 12rem;
+    gap: 2.6rem;
+    justify-content: center;
+  }
+}
