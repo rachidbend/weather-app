@@ -1,0 +1,121 @@
+.searchPanel {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: hsla(234, 32%, 17%, 1);
+  z-index: 9999;
+  width: 45.9rem;
+  min-height: 100%;
+  padding: 0 4.6rem;
+  transform: translateX(-100%);
+  transition: transform 460ms ease-in-out;
+}
+
+.searchPanelActive {
+  transform: translateX(0%);
+}
+
+.btnCloseContainer {
+  text-align: right;
+  background: none;
+  margin-bottom: 3.8rem;
+}
+.btnClose {
+  padding: 0.7rem;
+  margin-top: 1.2rem;
+}
+.closeIcon {
+  width: 1.8rem;
+  height: 1.8rem;
+  background-color: transparent;
+}
+.searchContainer form {
+  display: flex;
+  position: relative;
+  gap: 1.2rem;
+}
+.searchInputContainer {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 5.8rem;
+}
+
+.searchIcon {
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  top: 25%;
+
+  left: 1.2rem;
+}
+.inputSearch {
+  background: none;
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  outline: none;
+  border: 1px solid #e7e7eb;
+  height: 4.8rem;
+  padding-left: 4.9rem;
+  width: auto;
+  flex-grow: 2;
+}
+.inputSearch::placeholder {
+  color: hsla(231, 9%, 42%, 1);
+}
+.btnSearch {
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  background-color: hsla(236, 80%, 57%, 1);
+  /* width: 8.6rem; */
+  height: 4.6rem;
+  padding: 1.3rem 1.3rem 1.5rem 1.8rem;
+  border: 0.1rem solid hsla(236, 80%, 57%, 1);
+  transition: color 360ms, background 360ms;
+}
+.btnSearch:hover {
+  border: 0.1rem solid hsla(236, 80%, 57%, 1);
+  background-color: hsla(234, 32%, 17%, 1);
+  color: hsla(236, 80%, 57%, 1);
+}
+
+.historyComponent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #e7e7eb;
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.6rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 2.3rem 1.2rem;
+  border: 1px solid transparent;
+  text-transform: capitalize;
+  margin-bottom: 2.6rem;
+  transition: border 360ms;
+}
+
+.historyArrowIcon {
+  height: 1.2rem;
+  width: auto;
+  opacity: 0;
+  transition: opacity 360ms;
+}
+
+.historyComponent:hover {
+  border: 1px solid #616475;
+}
+
+.historyComponent:hover .historyArrowIcon {
+  opacity: 1;
+}

@@ -153,3 +153,6 @@
   margin: 0 auto;
   margin-top: 0.4rem;
 }
+
+@media screen and (max-width: 600px) {
+}

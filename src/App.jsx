@@ -1,10 +1,12 @@
 import styles from './App.module.css';
 import ForcastAndHighlightsPanel from './components/forcastAndHighlightsPanel/ForcastAndHighlightsPanel';
+import SearchPanel from './components/searchPanel/SearchPanel';
 import TodaysWeather from './components/todaysWeather/TodaysWeather';
 
 function App() {
   return (
     <div className={styles.app}>
+      <SearchPanel />
       <TodaysWeather />
       <ForcastAndHighlightsPanel />
     </div>

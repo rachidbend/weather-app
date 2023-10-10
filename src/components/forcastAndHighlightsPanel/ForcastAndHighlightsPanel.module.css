@@ -31,3 +31,9 @@
   background-color: hsla(240, 9%, 91%, 1);
   color: #110e3c;
 }
+
+@media screen and (max-width: 600px) {
+  .ForcastAndHighlightsPanel {
+    padding: 0;
+  }
+}

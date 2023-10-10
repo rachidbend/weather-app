@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 // get the average temp
 function getAvrg(arr) {
   const value = Number(
-    (arr.reduce((acc, cur) => acc + cur) / arr.length).toFixed(2)
+    (arr.reduce((acc, cur) => acc + cur) / arr.length).toFixed(1)
   );
   return value;
 }
@@ -24,9 +24,10 @@ const initialState = {
   todaysWeather: {},
   forcastWeather: [],
   searchQuery: '',
-  searchHistory: [],
+  searchHistory: ['rabat', 'london', 'paris'],
   navIsOpen: false,
   coords: { lat: 0, lng: 0 },
+  getMyLocation: true,
 };
 
 function reducer(state, action) {
@@ -58,6 +59,28 @@ function reducer(state, action) {
         ...state,
         coords: { lat: action.payload.lat, lng: action.payload.lng },
       };
+    case 'search/changed':
+      return {
+        ...state,
+        searchQuery: action.payload,
+      };
+    case 'cityName/entered':
+      return {
+        ...state,
+        cityName: state.searchQuery,
+        searchHistory: [...state.searchHistory, state.searchQuery],
+      };
+    case 'history/requested':
+      return {
+        ...state,
+        cityName: action.payload,
+        searchQuery: action.payload,
+      };
+    case 'myLocation/load':
+      return { ...state, getMyLocation: true };
+    case 'myLocation/loaded':
+      return { ...state, getMyLocation: false };
+
     default:
       throw new Error('unknown action');
   }
@@ -83,13 +106,81 @@ function WeatherProvider({ children }) {
       searchHistory,
       navIsOpen,
       coords,
+      getMyLocation,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
 
   useEffect(
     function () {
+      if (getMyLocation) {
+        navigator.geolocation.getCurrentPosition(
+          function (position) {
+            const { latitude: lat } = position.coords;
+            const { longitude: lng } = position.coords;
+
+            dispatch({
+              type: 'coords/loaded',
+              payload: { lat, lng },
+            });
+            dispatch({ type: 'myLocation/loaded' });
+          },
+          function () {
+            dispatch({ type: 'myLocation/load' });
+            throw new Error(`Couldn't find you location`);
+          }
+        );
+      }
+    },
+    [getMyLocation]
+  );
+
+  function onSearchQueryChange(value) {
+    // 1- take the value and set it to the search query using a dispatch
+    dispatch({ type: 'search/changed', payload: value.toLowerCase() });
+  }
+
+  function getCityName() {
+    dispatch({ type: 'cityName/entered' });
+    dispatch({ type: 'nav/toggled' });
+    // 1- use the search query to fetch the city coords
+    // 2- dispatch an action to set the coords
+    // 3- close the nav
+  }
+
+  useEffect(
+    function () {
+      async function getCityCoords() {
+        dispatch({ type: 'isLoading/loading' });
+        if (cityName === '') return;
+        try {
+          const res = await fetch(
+            `https://geocode.xyz/city=${searchQuery}?json=1&auth=${GEO_KEY}`
+          );
+          const data = await res.json();
+          console.log(data);
+          dispatch({
+            type: 'coords/loaded',
+            payload: {
+              lat: data.latt,
+              lng: data.longt,
+            },
+          });
+        } catch (err) {
+          throw new Error(`couldn't find the city name!`);
+        } finally {
+          dispatch({ type: 'isLoading/loaded' });
+        }
+      }
+      getCityCoords();
+    },
+    [cityName]
+  );
+
+  useEffect(
+    function () {
       async function getWeather() {
+        if (coords.lat === 0 && coords.lng === 0) return;
         dispatch({ type: 'isLoading/loading' });
         try {
           const res = await fetch(
@@ -241,24 +332,15 @@ function WeatherProvider({ children }) {
       //
       getWeather();
     },
-    [cityName, coords]
+    [coords]
   );
 
-  useEffect(function () {
-    navigator.geolocation.getCurrentPosition(
-      function (position) {
-        const { latitude: lat } = position.coords;
-        const { longitude: lng } = position.coords;
-        dispatch({
-          type: 'coords/loaded',
-          payload: { lat, lng },
-        });
-      },
-      function () {
-        throw new Error(`Couldn't find you location`);
-      }
-    );
-  }, []);
+  // useEffect(
+  //   function () {
+  //     async function getCityCoords() {}
+  //   },
+  //   [searchQuery]
+  // );
 
   // format date
   function formatDate(date) {
@@ -291,6 +373,19 @@ function WeatherProvider({ children }) {
     dispatch({ type: 'degree/fahrenheit' });
   }
 
+  function onNavToggle() {
+    dispatch({ type: 'nav/toggled' });
+  }
+
+  function onHistoryClick(city) {
+    dispatch({ type: 'history/requested', payload: city });
+    dispatch({ type: 'nav/toggled' });
+  }
+
+  function onGetMyLocation() {
+    dispatch({ type: 'myLocation/load' });
+  }
+
   return (
     <context.Provider
       value={{
@@ -302,12 +397,17 @@ function WeatherProvider({ children }) {
         degree,
         todaysWeather,
         forcastWeather,
-        searchQuery,
         searchHistory,
         navIsOpen,
         formatDate,
         onCelsiusClick,
         onFahrenheitClick,
+        searchQuery,
+        onSearchQueryChange,
+        getCityName,
+        onNavToggle,
+        onHistoryClick,
+        onGetMyLocation,
       }}
     >
       {children}

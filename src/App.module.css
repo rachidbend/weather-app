@@ -17,6 +17,7 @@ html {
   font-family: 'Raleway', sans-serif;
   background-color: hsla(234, 32%, 17%, 1);
   min-height: 100vh;
+  position: relative;
 }
 
 :global(.btn) {
@@ -24,4 +25,13 @@ html {
   border: none;
   outline: none;
   cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .app {
+    min-height: auto;
+    display: grid;
+    grid-template-columns: auto;
+    /* grid-template-rows: 100vh auto; */
+  }
 }

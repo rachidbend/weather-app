@@ -3,7 +3,6 @@ import ForcastComponent from '../forcastComponent/ForcastComponent';
 import styles from './ForcastSection.module.css';
 export default function ForcastSection() {
   const { forcastWeather } = useWeather();
-  console.log(forcastWeather);
 
   return (
     <div className={styles.forcastSection}>

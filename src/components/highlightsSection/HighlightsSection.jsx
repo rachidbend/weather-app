@@ -4,7 +4,7 @@ import windDirectionIcon from '../../assets/svg/icon-navigation.svg';
 import WindDirectionText from './WindDirectionText';
 export default function HighlightsSection() {
   const { todaysWeather } = useWeather();
-  console.log(todaysWeather);
+
   if (Object.keys(todaysWeather).length === 0) return <p>Loading</p>;
   return (
     <div className={styles.highlightsSection}>
@@ -31,7 +31,7 @@ export default function HighlightsSection() {
         <div className={`${styles.highlightHumidity} ${styles.highlight}`}>
           <h3 className={styles.highlightHeader}>Humidity</h3>
           <p className={styles.highlightStat}>
-            {todaysWeather.humidity}
+            {todaysWeather.humidity.toFixed(0)}
             <span className={styles.highlightUnit}>%</span>
           </p>
           <div className={styles.humidityRangeContainer}>
@@ -66,7 +66,7 @@ export default function HighlightsSection() {
         <div className={`${styles.highlightPressure} ${styles.highlight}`}>
           <h3 className={styles.highlightHeader}>Air Pressure</h3>
           <p className={styles.highlightStat}>
-            {todaysWeather.airPressure}
+            {todaysWeather.airPressure.toFixed(0)}
             <span className={styles.highlightUnit}>mb</span>
           </p>
         </div>

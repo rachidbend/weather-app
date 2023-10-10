@@ -66,7 +66,7 @@ export default function GetWeatherIcon({ condition, className = '' }) {
     condition === 'shower drizzle' ||
     condition === 'shower rain and drizzle'
   )
-    return <img src={iconLightRain} />;
+    return <img src={iconLightRain} className={className} />;
   // heavy rain
   if (
     condition === 'heavy intensity rain' ||
